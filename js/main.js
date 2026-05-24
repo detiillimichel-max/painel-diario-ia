@@ -3,8 +3,7 @@
    MÓDULO: Controle principal da Interface e Interações
    ========================================== */
 
-// --- 1. Lógica das Saudações (Mantida) ---
-const nomeUsuario = "Michel";
+// --- 1. Lógica das Saudações ---
 const saudacoes = [
     "O que vamos construir hoje?",
     "O que está pensando?",
@@ -22,18 +21,18 @@ function iniciarPainel() {
     }
 }
 
-// --- 2. Lógica dos Novos Botões (Descobrir e Biblioteca) ---
+// --- 2. Lógica dos Botões (Funcionalidades Locais) ---
 
-// Função: Descobrir (Clima e GNews)
+// Função: Descobrir (Simulação de Acesso ao Clima e Notícias)
 function abrirDescobrir() {
-    console.log("Consultando API de Clima e Notícias...");
-    alert("Carregando Painel de Notícias e Clima...");
+    console.log("Acessando painel de clima e notícias...");
+    alert("Painel: Clima atual e Notícias do GNews carregados.");
 }
 
-// Função: Biblioteca (Histórico e Snippets/Etiquetas)
+// Função: Biblioteca (Histórico e Blocos Organizados)
 function abrirBiblioteca() {
     console.log("Abrindo histórico e biblioteca de blocos...");
-    alert("Abrindo Biblioteca: Histórico de Chats e Blocos Reutilizáveis.");
+    alert("Biblioteca: Histórico de chats e seus blocos salvos organizados por etiquetas.");
 }
 
 // --- 3. Execução Inicial ---
