@@ -1,1 +1,189 @@
+/* ==========================================
+   FICHEIRO: css/style.css
+   ESTILO: Azul Escuro Premium + Navegação Flutuante
+   ========================================== */
 
+/* 1. Reset Global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 2. Fundo Azul Escuro com Efeito de Ondas Suaves */
+body {
+    background-color: #0d111c;
+    background-image: 
+        radial-gradient(ellipse at 50% -20%, #2a3b5c 0%, transparent 60%),
+        radial-gradient(ellipse at 120% 120%, #1c2841 0%, transparent 50%);
+    background-attachment: fixed;
+    color: #e2e8f0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Mantém o app fixo, sem rolar a tela toda */
+    position: relative;
+    z-index: 0;
+}
+
+/* 3. A Animação da "Onda" */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 15% 50%, rgba(45, 65, 105, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(30, 50, 90, 0.12) 0%, transparent 50%);
+    z-index: -1;
+    animation: ondaLuz 12s ease-in-out infinite alternate;
+}
+
+@keyframes ondaLuz {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.1); opacity: 1; }
+}
+
+/* 4. Glassmorphism Base (Vidro) */
+.efeito-vidro {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================
+   5. ESTRUTURA DA TELA E CONTEÚDO
+   ========================================== */
+
+/* Área onde fica o texto e a saudação no centro */
+.area-conteudo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.saudacao {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+/* Área inferior que prende as ferramentas (barras) */
+.area-interacao {
+    padding: 10px 15px 20px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* ==========================================
+   6. FERRAMENTA: PÍLULA DE DIGITAÇÃO E BOTÕES
+   ========================================== */
+.pilula-input {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 50px;
+    gap: 10px;
+}
+
+.pilula-input input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+}
+
+.pilula-input input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-icone {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-icone:active {
+    color: #fff;
+    transform: scale(0.9);
+}
+
+/* Botão de voz com destaque azul escuro */
+.btn-voz-destaque {
+    background-color: #1a3b7c;
+    border: none;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    color: #fff;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* ==========================================
+   7. FERRAMENTA: NAVEGAÇÃO INFERIOR
+   ========================================== */
+.navegacao-inferior {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.nav-pilula {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    padding: 8px;
+    border-radius: 50px;
+}
+
+.nav-item {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.nav-item.ativo {
+    color: #fff;
+}
+
+.nav-item i {
+    font-size: 1.4rem;
+}
+
+/* Botão extra ao lado do menu principal */
+.btn-flutuante-extra {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
