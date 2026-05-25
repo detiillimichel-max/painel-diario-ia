@@ -20,10 +20,10 @@ body {
         radial-gradient(ellipse at 120% 120%, #1c2841 0%, transparent 50%);
     background-attachment: fixed;
     color: #e2e8f0;
-    height: 100vh;
+    height: 100dvh; /* CORRIGIDO PARA MOBILE */
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Mantém o app fixo, sem rolar a tela toda */
+    overflow: hidden; 
     position: relative;
     z-index: 0;
 }
@@ -75,8 +75,9 @@ body::before {
 }
 
 /* Área inferior que prende as ferramentas (barras) */
+/* MARGEM DE SEGURANÇA AJUSTADA PARA 80px */
 .area-interacao {
-    padding: 10px 15px 20px 15px;
+    padding: 10px 15px 80px 15px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -91,6 +92,8 @@ body::before {
     padding: 8px 12px;
     border-radius: 50px;
     gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .pilula-input input {
@@ -153,6 +156,7 @@ body::before {
     justify-content: space-around;
     padding: 8px;
     border-radius: 50px;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .nav-item {
@@ -186,4 +190,9 @@ body::before {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
 }
+
+/* Espaçamento extra de segurança final */
+.safe-area { height: 20px; }
+
