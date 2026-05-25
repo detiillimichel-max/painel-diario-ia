@@ -1,6 +1,6 @@
 /* ==========================================
    FICHEIRO: js/main.js
-   MÓDULO: Controle principal, Interações e Persistência de Dados
+   MÓDULO: Controle principal, Chat Dinâmico e Persistência
    ========================================== */
 
 // --- 1. Lógica das Saudações ---
@@ -14,14 +14,26 @@ const saudacoes = [
 ];
 
 function iniciarPainel() {
-    const elementoSaudacao = document.querySelector('.saudacao');
+    const elementoSaudacao = document.getElementById('saudacao');
     if (elementoSaudacao) {
         const indiceAleatorio = Math.floor(Math.random() * saudacoes.length);
         elementoSaudacao.textContent = saudacoes[indiceAleatorio];
     }
 }
 
-// --- 2. Lógica de Envio e Persistência ---
+// --- 2. Lógica de Chat e Persistência ---
+
+function adicionarBalaoNaTela(texto, classe) {
+    const container = document.getElementById('mensagensHistorico');
+    const balao = document.createElement('div');
+    balao.className = `balao-mensagem ${classe}`;
+    balao.textContent = texto;
+    container.appendChild(balao);
+    
+    // Rola para a mensagem mais recente
+    const areaChat = document.getElementById('areaChat');
+    areaChat.scrollTop = areaChat.scrollHeight;
+}
 
 function salvarMensagem(texto) {
     let historico = JSON.parse(localStorage.getItem('chatHistorico')) || [];
@@ -34,45 +46,46 @@ function enviarMensagem() {
     const valor = input.value.trim();
     
     if (valor !== "") {
-        // Salva na memória do navegador
+        // 1. Esconde a saudação inicial se for a primeira mensagem
+        const saudacao = document.getElementById('saudacao');
+        if (saudacao) saudacao.style.display = 'none';
+
+        // 2. Adiciona na tela e salva
+        adicionarBalaoNaTela(valor, 'mensagem-usuario');
         salvarMensagem(valor);
-        
-        console.log("Mensagem salva e enviada:", valor);
-        alert("Enviado e salvo: " + valor);
         
         input.value = ""; // Limpa o campo
     }
 }
 
-// --- 3. Lógica dos Botões (Descobrir e Biblioteca) ---
+// --- 3. Lógica dos Botões ---
 
 function abrirDescobrir() {
-    console.log("Acessando painel de clima...");
     alert("Painel: Clima atual carregado.");
 }
 
 function abrirBiblioteca() {
-    // Recupera o histórico salvo
     const historico = JSON.parse(localStorage.getItem('chatHistorico')) || [];
-    console.log("Abrindo histórico...", historico);
+    const container = document.getElementById('mensagensHistorico');
     
-    let lista = historico.map(h => h.mensagem).join('\n');
-    alert("Seu Histórico:\n" + (lista || "Nenhuma mensagem salva."));
+    // Limpa a tela e recarrega do histórico
+    container.innerHTML = '';
+    const saudacao = document.getElementById('saudacao');
+    if (saudacao) saudacao.style.display = 'none';
+    
+    historico.forEach(item => {
+        adicionarBalaoNaTela(item.mensagem, 'mensagem-usuario');
+    });
 }
 
-// --- 4. Execução Inicial e Eventos ---
+// --- 4. Execução Inicial ---
 document.addEventListener('DOMContentLoaded', () => {
     iniciarPainel();
 
-    const btnEnviar = document.getElementById('btnEnviar');
-    if (btnEnviar) {
-        btnEnviar.addEventListener('click', enviarMensagem);
-    }
-
+    document.getElementById('btnEnviar')?.addEventListener('click', enviarMensagem);
+    
     const input = document.getElementById('entradaUsuario');
-    if (input) {
-        input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') enviarMensagem();
-        });
-    }
+    input?.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') enviarMensagem();
+    });
 });
