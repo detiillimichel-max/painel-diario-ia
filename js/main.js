@@ -1,6 +1,6 @@
 /* ==========================================
    FICHEIRO: js/main.js
-   MÓDULO: Controle principal da Interface e Interações
+   MÓDULO: Controle principal, Interações e Lógica de Envio
    ========================================== */
 
 // --- 1. Lógica das Saudações ---
@@ -21,21 +21,47 @@ function iniciarPainel() {
     }
 }
 
-// --- 2. Lógica dos Botões (Funcionalidades Locais) ---
+// --- 2. Lógica de Envio (Acréscimo do Botão) ---
 
-// Função: Descobrir (Simulação de Acesso ao Clima e Notícias)
+function enviarMensagem() {
+    const input = document.getElementById('entradaUsuario');
+    const valor = input.value.trim();
+    
+    if (valor !== "") {
+        console.log("Mensagem enviada:", valor);
+        // Aqui entra a lógica futura de processamento da IA
+        alert("Enviado: " + valor);
+        input.value = ""; // Limpa o campo após o envio
+    }
+}
+
+// --- 3. Lógica dos Botões (Descobrir e Biblioteca) ---
+
 function abrirDescobrir() {
-    console.log("Acessando painel de clima e notícias...");
-    alert("Painel: Clima atual e Notícias do GNews carregados.");
+    console.log("Acessando painel de clima...");
+    alert("Painel: Clima atual carregado.");
 }
 
-// Função: Biblioteca (Histórico e Blocos Organizados)
 function abrirBiblioteca() {
-    console.log("Abrindo histórico e biblioteca de blocos...");
-    alert("Biblioteca: Histórico de chats e seus blocos salvos organizados por etiquetas.");
+    console.log("Abrindo histórico...");
+    alert("Biblioteca: Histórico e Snippets acessados.");
 }
 
-// --- 3. Execução Inicial ---
+// --- 4. Execução Inicial e Eventos ---
 document.addEventListener('DOMContentLoaded', () => {
     iniciarPainel();
+
+    // Adiciona evento de clique ao botão de envio que acrescentamos no HTML
+    const btnEnviar = document.getElementById('btnEnviar');
+    if (btnEnviar) {
+        btnEnviar.addEventListener('click', enviarMensagem);
+    }
+
+    // Permite enviar ao apertar a tecla "Enter"
+    const input = document.getElementById('entradaUsuario');
+    if (input) {
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') enviarMensagem();
+        });
+    }
 });
