@@ -3,51 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Painel Diário de Luxo</title>
-    
+    <title>Painel</title>
     <link rel="stylesheet" href="css/style.css">
-    
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
 
     <main class="area-conteudo">
-        <h1 class="saudacao"></h1>
+        <h1 class="saudacao">Como posso ajudar?</h1>
     </main>
 
     <section class="area-interacao">
-        
         <div class="pilula-input efeito-vidro">
             <button class="btn-icone"><i class="ph ph-plus"></i></button>
-            <input type="text" id="entradaUsuario" placeholder="Pergunte ao assistente" autocomplete="off">
+            <input type="text" id="entradaUsuario" placeholder="O que precisa?" autocomplete="off">
+            
+            <button class="btn-icone" id="btnEnviar"><i class="ph ph-arrow-up"></i></button>
+            
             <button class="btn-icone"><i class="ph ph-microphone"></i></button>
-            <button class="btn-voz-destaque"><i class="ph ph-waveform"></i></button>
         </div>
 
         <nav class="navegacao-inferior">
             <div class="nav-pilula efeito-vidro">
-                <button class="nav-item ativo">
-                    <i class="ph-fill ph-house"></i>
+                <button class="nav-item ativo" onclick="window.location.reload()">
+                    <i class="ph ph-house"></i>
                     <span>Início</span>
                 </button>
-                <button class="nav-item">
+                <button class="nav-item" onclick="abrirDescobrir()">
                     <i class="ph ph-compass"></i>
                     <span>Descobrir</span>
                 </button>
-                <button class="nav-item">
+                <button class="nav-item" onclick="abrirBiblioteca()">
                     <i class="ph ph-books"></i>
                     <span>Biblioteca</span>
                 </button>
             </div>
-            
             <button class="btn-flutuante-extra efeito-vidro">
-                <i class="ph ph-chat-teardrop-dots"></i>
+                <i class="ph ph-chats"></i>
             </button>
         </nav>
-
     </section>
 
     <script src="js/main.js"></script>
-
 </body>
 </html>
