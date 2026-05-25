@@ -1,6 +1,6 @@
 /* ==========================================
    FICHEIRO: js/main.js
-   MÓDULO: Controle principal, Interações e Lógica de Envio
+   MÓDULO: Controle principal, Interações e Persistência de Dados
    ========================================== */
 
 // --- 1. Lógica das Saudações ---
@@ -21,17 +21,26 @@ function iniciarPainel() {
     }
 }
 
-// --- 2. Lógica de Envio (Acréscimo do Botão) ---
+// --- 2. Lógica de Envio e Persistência ---
+
+function salvarMensagem(texto) {
+    let historico = JSON.parse(localStorage.getItem('chatHistorico')) || [];
+    historico.push({ mensagem: texto, data: new Date().toISOString() });
+    localStorage.setItem('chatHistorico', JSON.stringify(historico));
+}
 
 function enviarMensagem() {
     const input = document.getElementById('entradaUsuario');
     const valor = input.value.trim();
     
     if (valor !== "") {
-        console.log("Mensagem enviada:", valor);
-        // Aqui entra a lógica futura de processamento da IA
-        alert("Enviado: " + valor);
-        input.value = ""; // Limpa o campo após o envio
+        // Salva na memória do navegador
+        salvarMensagem(valor);
+        
+        console.log("Mensagem salva e enviada:", valor);
+        alert("Enviado e salvo: " + valor);
+        
+        input.value = ""; // Limpa o campo
     }
 }
 
@@ -43,21 +52,23 @@ function abrirDescobrir() {
 }
 
 function abrirBiblioteca() {
-    console.log("Abrindo histórico...");
-    alert("Biblioteca: Histórico e Snippets acessados.");
+    // Recupera o histórico salvo
+    const historico = JSON.parse(localStorage.getItem('chatHistorico')) || [];
+    console.log("Abrindo histórico...", historico);
+    
+    let lista = historico.map(h => h.mensagem).join('\n');
+    alert("Seu Histórico:\n" + (lista || "Nenhuma mensagem salva."));
 }
 
 // --- 4. Execução Inicial e Eventos ---
 document.addEventListener('DOMContentLoaded', () => {
     iniciarPainel();
 
-    // Adiciona evento de clique ao botão de envio que acrescentamos no HTML
     const btnEnviar = document.getElementById('btnEnviar');
     if (btnEnviar) {
         btnEnviar.addEventListener('click', enviarMensagem);
     }
 
-    // Permite enviar ao apertar a tecla "Enter"
     const input = document.getElementById('entradaUsuario');
     if (input) {
         input.addEventListener('keypress', (e) => {
